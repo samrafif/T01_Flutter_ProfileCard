@@ -68,73 +68,82 @@ class _ProfilePageState extends State<ProfilePage> {
           child: ListView(
         padding: EdgeInsets.all(16),
         children: [
-          Card(
-            elevation: 4,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(32),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Image from URL
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Center(
-                    child: FittedBox(
-                      fit: BoxFit.cover,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.all(Radius.circular(76)),
-                        child: Image.network('https://thispersondoesnotexist.com/?dummy=$_counter', key: ValueKey(_counter), // ensures image widget is recreated
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Card(
+              elevation: 4,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(32),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Image from URL
+                  Padding(
+                    padding: const EdgeInsets.all(0.0),
+                    child: Center(
+                      child: FittedBox(
                         fit: BoxFit.cover,
-                        loadingBuilder: (context, child, progress) {
-                          if (progress == null) return child;
-                          return CircularProgressIndicator();
-                        },),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.vertical(top: Radius.circular(76)),
+                          child: Image.network('https://thispersondoesnotexist.com/?dummy=$_counter', key: ValueKey(_counter), // ensures image widget is recreated
+                          fit: BoxFit.cover,
+                          loadingBuilder: (context, child, progress) {
+                            if (progress == null) return child;
+                            return CircularProgressIndicator();
+                          },),
+                        ),
                       ),
                     ),
                   ),
-                ),
-
-                // Content
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(32.0, 10.0, 32.0, 16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(name,
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                          )
-                      ),
-                      SizedBox(height: 8),
-                      Text(
-                        bio,
-                        style: TextStyle(color: Colors.grey[700]),
-                      ),
-                      
-                    ],
+            
+                  // Content
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(32.0, 24.0, 32.0, 10.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Text(name,
+                                style: TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                )
+                            ),
+                            SizedBox(width: 8),
+                            Icon(Icons.verified, color: Colors.blue, size: 20),
+                          ],
+                        ),
+                        SizedBox(height: 8),
+                        Text(
+                          bio,
+                          style: TextStyle(color: Colors.grey[700]),
+                        ),
+                        
+                      ],
+                    ),
                   ),
-                ),
-
-                // Button Row
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(24.0,0,24.0,24.0),
-                  child: OverflowBar(
-                    alignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      TextIcon(text: numbersList[0].toString() + "K", icon: Icons.person),
-                      TextIcon(text: numbersList[1].toString() + "K", icon: Icons.check_box),
-                      ElevatedButton.icon(
-                        onPressed: () {},
-                        icon: Icon(Icons.add, color: Colors.black),
-                        label: Text("Follow", style: TextStyle(color: Colors.black)),
-
-                      ),
-                    ],
+            
+                  // Button Row
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(24.0,0,24.0,24.0),
+                    child: OverflowBar(
+                      alignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        TextIcon(text: "${numbersList[0]}K", icon: Icons.people_alt),
+                        TextIcon(text: numbersList[1].toString(), icon: Icons.article),
+                        ElevatedButton.icon(
+                          onPressed: () {},
+                          icon: Icon(Icons.add, color: Colors.black),
+                          label: Text("Follow", style: TextStyle(color: Colors.black)),
+            
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
           SizedBox(height: 20),
